@@ -74,6 +74,14 @@ function App() {
     }
   };
 
+  // Handle Enter key press for form submission
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && inputText.trim()) {
+      event.preventDefault(); // Prevent new line in textarea
+      handleTranslate(); // Trigger translation
+    }
+  };
+
   return (
     <div style={{
       display: 'flex',
@@ -127,11 +135,12 @@ function App() {
             <textarea
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
+              onKeyDown={handleKeyPress} // Detect Enter key press
               placeholder="Enter text to translate"
               style={{
                 width: '100%',
-                padding: '8px',
-                minHeight: '80px', // Smaller height
+                padding: '6px',
+                minHeight: '50px', // Even smaller height for the input
                 borderRadius: '4px',
                 border: '1px solid #888',
                 backgroundColor: '#444', // Dark input area
@@ -170,8 +179,8 @@ function App() {
               placeholder="Translation will appear here"
               style={{
                 width: '100%',
-                padding: '8px',
-                minHeight: '80px', // Smaller height
+                padding: '6px',
+                minHeight: '50px', // Smaller height for output
                 borderRadius: '4px',
                 border: '1px solid #888',
                 backgroundColor: '#555', // Dark background for output area
